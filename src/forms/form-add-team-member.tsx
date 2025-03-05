@@ -1,11 +1,13 @@
-import { FieldValues } from "react-hook-form";
-import { useAddUser, User, UserResponse } from "../api/users";
-import { Form } from "../components/forms/form";
-import { FormAddDrinkOrders } from "./form-add-drink-orders";
-import { ButtonType } from "../components/forms/inputs/input-button";
-import { DrinkOrder, useAddDrinkOrder } from "../api/drink-orders";
 import { useState } from "react";
+import { FieldValues, useFormContext } from "react-hook-form";
+import { Link } from "react-router";
+import { DrinkOrder, useAddDrinkOrder } from "../api/drink-orders";
+import { useAddUser, User, UserResponse } from "../api/users";
+import { Banner, BannerType } from "../components/banner";
 import { ButtonVariation } from "../components/button";
+import { Form } from "../components/forms/form";
+import { ButtonType } from "../components/forms/inputs/input-button";
+import { FormAddDrinkOrders } from "./form-add-drink-orders";
 
 export const FormAddTeamMember = () => {
   const [drinkOrders, setDrinkOrders] = useState<DrinkOrder[]>();
@@ -53,20 +55,17 @@ export const FormAddTeamMember = () => {
     return <div>Saving Team Member...</div>;
   }
 
-  if (addUserIsError || addDrinkOrderIsError) {
-    return <div>Error saving Team Member...</div>;
-  }
-
-  if (addUserIsSuccess && addDrinkOrderIsSuccess) {
-    return <div>Team Member saved successfully</div>;
-  }
-
   return (
     <Form defaultValues={defaultValues} onSubmit={handleSubmit}>
-      <Form.SectionTitle value="Team Member Details" />
+      <Banners
+        isError={addUserIsError || addDrinkOrderIsError}
+        isSuccess={addUserIsSuccess && addDrinkOrderIsSuccess}
+      />
+
+      <Form.SectionTitle value="Team member details" />
 
       <Form.FormField fieldName="firstName">
-        <Form.InputLabel value="First Name" />
+        <Form.InputLabel value="First Name" required={true} />
         <Form.InputText
           fieldName="firstName"
           validation={{ required: "First name is required" }}
@@ -75,7 +74,7 @@ export const FormAddTeamMember = () => {
       </Form.FormField>
 
       <Form.FormField fieldName="lastName">
-        <Form.InputLabel value="Last Name" />
+        <Form.InputLabel value="Last Name" required={true} />
         <Form.InputText
           fieldName="lastName"
           validation={{ required: "Last name is required" }}
@@ -83,11 +82,9 @@ export const FormAddTeamMember = () => {
         />
       </Form.FormField>
 
-      <Form.SectionTitle value="Drink Orders" />
-
       <FormAddDrinkOrders />
 
-      <div className="flex justify-end w-full gap-2">
+      <div className="flex flex-col-reverse sm:flex-row justify-end w-full gap-2 mt-4">
         <Form.InputButton
           type={ButtonType.Reset}
           value="Reset"
@@ -96,10 +93,42 @@ export const FormAddTeamMember = () => {
         />
         <Form.InputButton
           type={ButtonType.Submit}
-          value="Save Team Member"
+          value="Save team member"
           disabled={addUserIsPending || addDrinkOrderIsPending}
         />
       </div>
     </Form>
+  );
+};
+
+const Banners = ({
+  isError,
+  isSuccess,
+}: {
+  isError: boolean;
+  isSuccess: boolean;
+}) => {
+  const { formState } = useFormContext();
+
+  return (
+    <>
+      {!formState.isDirty && isError && (
+        <Banner type={BannerType.ERROR}>
+          Oops! There was an error while adding this team member. Please try
+          again later.
+        </Banner>
+      )}
+
+      {!formState.isDirty && isSuccess && (
+        <Banner type={BannerType.SUCCESS}>
+          <div>
+            {`Team Member successfully added! Add another team member below, or `}
+            <Link to={"/"} className="font-bold">
+              start a tea run!
+            </Link>
+          </div>
+        </Banner>
+      )}
+    </>
   );
 };

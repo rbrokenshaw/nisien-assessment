@@ -29,9 +29,9 @@ export const InputButton = ({
   return (
     <input
       className={classNames(
-        "border cursor-pointer px-3 py-2 rounded-md font-semibold",
+        "border cursor-pointer px-3 py-2 rounded-lg font-semibold text-sm",
         variation === ButtonVariation.PRIMARY
-          ? "bg-primary border-lime-400 hover:bg-lime-200"
+          ? "bg-primary border-lime-300 hover:bg-lime-200 text-lime-900"
           : "bg-white border-gray-300 hover:bg-gray-100 text-gray-600",
       )}
       type={type === ButtonType.Reset ? "button" : type}

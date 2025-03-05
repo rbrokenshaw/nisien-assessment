@@ -21,7 +21,7 @@ export const Home = () => {
 
   return (
     <>
-      <h2 className="text-xl  font-bold mb-4">Start a Tea Round</h2>
+      <h2 className="text-xl  font-bold mb-4">Start a Tea Run</h2>
 
       <p className="mb-4">
         Select participating team members, then click 'Choose!'

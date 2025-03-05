@@ -4,7 +4,6 @@
   --color-primary: #cbff49;
 }
 
-/* body {
-  background-color: black;
-  color: white;
-} */
+body {
+  font-family: Quicksand, sans-serif;
+}

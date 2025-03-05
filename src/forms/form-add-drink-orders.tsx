@@ -1,16 +1,19 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Form } from "../components/forms/form";
-import { Button, ButtonVariation } from "../components/button";
 import { IconCross } from "../assets/icons/icon-cross";
-import { classNames } from "../helpers/classnames";
 import { IconPlus } from "../assets/icons/icon-plus";
+import { Button } from "../components/button";
+import { Form } from "../components/forms/form";
+import { classNames } from "../helpers/classnames";
 
 export const FormAddDrinkOrders = () => {
-  const { control } = useFormContext();
+  const { watch, control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: "drinkOrders",
     control,
   });
+
+  const firstName = watch("firstName");
+  const drinkOrders = watch("drinkOrders");
 
   const handleAddClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -26,25 +29,34 @@ export const FormAddDrinkOrders = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4 mt-5">
+      <Form.SectionTitle
+        value={`${firstName ? firstName : "Member"}'s drink order${drinkOrders.length > 1 ? "s" : ""}`}
+      />
+
       {fields.map((field, index) => (
-        <div className="flex gap-4 items-center justify-start w-full">
-          <div className="flex gap-4 items-center w-full" key={field.id}>
+        <div
+          className="flex gap-4 items-center justify-start w-full border-b border-gray-200 pb-5"
+          key={field.id}
+        >
+          <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
             <Form.FormField fieldName={`drinkOrders.${index}.name`}>
-              <Form.InputLabel value="Drink Name" />
+              <Form.InputLabel value="Drink Name" required={true} />
               <Form.InputText
                 key={`name-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.name`}
                 validation={{ required: "Drink name is required" }}
+                placeholder="e.g. Tea, Coffee, Water"
               />
             </Form.FormField>
 
             <Form.FormField fieldName={`drinkOrders.${index}.type`}>
-              <Form.InputLabel value="Drink Type" />
+              <Form.InputLabel value="Drink Type" required={true} />
               <Form.InputText
                 key={`type-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.type`}
                 validation={{ required: "Drink type is required" }}
+                placeholder="e.g. Earl Grey, Cappuccino"
               />
             </Form.FormField>
 
@@ -53,19 +65,24 @@ export const FormAddDrinkOrders = () => {
               <Form.InputText
                 key={`description-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.description`}
+                placeholder="e.g. Milk, two sugars, vanilla syrup"
               />
             </Form.FormField>
           </div>
 
           <button
             className={classNames(
-              "flex gap-2 items-center mt-8 cursor-pointer text-sm font-semibold",
-              index === 0 ? "invisible" : "",
+              "flex gap-2 items-center mt-8  text-sm font-semibold",
+              index === 0
+                ? "text-gray-400 cursor-not-allowed"
+                : "cursor-pointer",
             )}
             onClick={(event) => handleRemoveClick(event, index)}
             disabled={index === 0}
           >
-            <div className="w-4">
+            <div
+              className={classNames("w-3", index === 0 ? "text-gray-400" : "")}
+            >
               <IconCross />
             </div>
             Remove
@@ -73,15 +90,12 @@ export const FormAddDrinkOrders = () => {
         </div>
       ))}
 
-      <Button
-        onClick={handleAddClick}
-        variation={ButtonVariation.PRIMARY_SMALL}
-      >
-        <div className="w-4">
+      <Button onClick={handleAddClick}>
+        <div className="w-3">
           <IconPlus />
         </div>
-        Add Drink Order
+        Add another drink order
       </Button>
-    </>
+    </div>
   );
 };
