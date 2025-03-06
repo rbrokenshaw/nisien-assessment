@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import { IconUsersSlash } from "../assets/icons/icon-users-slash";
-import { Button, ButtonSize } from "../components/button";
+import { Button, ButtonVariant } from "../components/button";
 import { UserListItem } from "../components/user-list-item";
 import { UserToSelect, useUserContext } from "../context/user-context";
 
@@ -70,14 +70,33 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl font-bold">New Tea Run</h2>
+      <div className="flex flex-col sm:flex-row sm:flex-start sm:justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold mb-2">New Tea Run</h2>
 
-      <p className="text-sm">
-        Select at least two participating team members, choose their drinks,
-        then click 'Start a Tea Run!' to find the lucky tea runner!
-      </p>
+          <p className="text-sm">
+            Select at least two participating team members, choose their drinks,
+            then click 'Start a Tea Run!' to find the lucky tea runner!
+          </p>
+        </div>
 
-      <div className="flex flex-col gap-4">
+        <div className="flex flex-col-reverse sm:flex-row gap-2 items-start">
+          <Button
+            onClick={() => navigate("/drink-run-history")}
+            variant={ButtonVariant.SECONDARY}
+          >
+            Run History
+          </Button>
+          <Button
+            onClick={() => navigate("/create-drinks-run")}
+            disabled={users?.filter((user) => user.selected).length < 2}
+          >
+            Start a Tea Run!
+          </Button>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3">
         {users?.map((user: UserToSelect) => {
           return (
             <UserListItem
@@ -88,15 +107,6 @@ export const Home = () => {
             />
           );
         })}
-        <div className="flex justify-center w-full">
-          <Button
-            onClick={() => navigate("/create-drinks-run")}
-            size={ButtonSize.LARGE}
-            disabled={users?.filter((user) => user.selected).length < 2}
-          >
-            Start a Tea Run!
-          </Button>
-        </div>
       </div>
     </div>
   );

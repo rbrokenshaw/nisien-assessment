@@ -32,6 +32,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<UserToSelect[]>([]);
 
   useEffect(() => {
+    console.log("data changed");
     if (data) {
       setUsers(
         data.map((user: UserResponse) => {

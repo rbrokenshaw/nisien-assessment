@@ -5,7 +5,11 @@ import { Button } from "../components/button";
 import { Form } from "../components/forms/form";
 import { classNames } from "../helpers/classnames";
 
-export const FormAddDrinkOrders = () => {
+export const FormAddDrinkOrders = ({
+  showTitle = true,
+}: {
+  showTitle?: boolean;
+}) => {
   const { watch, control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: "drinkOrders",
@@ -30,9 +34,11 @@ export const FormAddDrinkOrders = () => {
 
   return (
     <div className="flex flex-col gap-4 mt-5">
-      <Form.SectionTitle
-        value={`${firstName ? firstName : "Member"}'s drink order${drinkOrders.length > 1 ? "s" : ""}`}
-      />
+      {showTitle && (
+        <Form.SectionTitle
+          value={`${firstName ? firstName : "Member"}'s drink order${drinkOrders.length > 1 ? "s" : ""}`}
+        />
+      )}
 
       {fields.map((field, index) => (
         <div
@@ -103,7 +109,7 @@ export const FormAddDrinkOrders = () => {
             >
               <IconCross />
             </div>
-            Remove
+            <span className="hidden sm:block">Remove</span>
           </button>
         </div>
       ))}

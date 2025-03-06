@@ -45,10 +45,10 @@ export const CreateDrinksRun = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 w-full">
-      <h2 className="text-lg text-center">
+      <h2 className="text-xl text-center">
         ☕ The tea runner is....
-        <span className="font-semibold">{runner?.firstName}</span>! Get the
-        kettle on!
+        <span className="font-bold">{runner?.firstName}</span>! Get the kettle
+        on!
       </h2>
 
       <DrinksOrder participants={participants} />

@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export type DrinkOrder = { name: string; type: string; description: string };
 
@@ -41,8 +41,13 @@ const addDrinkOrder = async (orderData: DrinkOrderData) => {
 };
 
 export const useAddDrinkOrder = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (data: DrinkOrderData) =>
       addDrinkOrder(data).then((response) => response.json),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
   });
 };

@@ -18,11 +18,16 @@ export const Form = ({
 }: PropsWithChildren<Props>) => {
   const methods = useForm({ defaultValues: defaultValues });
 
+  const handleSubmit = (data: FieldValues) => {
+    onSubmit(data);
+    methods.reset();
+  };
+
   return (
     <FormProvider {...methods}>
       <form
         className="flex flex-col gap-4"
-        onSubmit={methods.handleSubmit(onSubmit)}
+        onSubmit={methods.handleSubmit(handleSubmit)}
       >
         {children}
       </form>
