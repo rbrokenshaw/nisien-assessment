@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { DrinkOrderResponse } from "../drink-orders";
 
 export type User = {
   firstName: string;
@@ -7,6 +8,7 @@ export type User = {
 
 export type UserResponse = User & {
   id: string;
+  drinkOrders: DrinkOrderResponse[];
 };
 
 // GET USERS
@@ -18,7 +20,7 @@ const getUsers = async (): Promise<UserResponse[]> => {
   });
 
   if (!response.ok) {
-    throw new Error("Error fetching Users");
+    throw new Error("Error fetching users");
   }
 
   const data = await response.json();
@@ -46,7 +48,7 @@ const addUser = async (userData: User) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error creating User");
+    throw new Error("Error creating user");
   }
 
   const data = await response.json();

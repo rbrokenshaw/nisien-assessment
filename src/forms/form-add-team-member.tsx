@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { DrinkOrder, useAddDrinkOrder } from "../api/drink-orders";
 import { useAddUser, User, UserResponse } from "../api/users";
 import { Banner, BannerType } from "../components/banner";
-import { ButtonVariation } from "../components/button";
+import { ButtonVariant } from "../components/button";
 import { Form } from "../components/forms/form";
 import { ButtonType } from "../components/forms/inputs/input-button";
 import { FormAddDrinkOrders } from "./form-add-drink-orders";
@@ -68,7 +68,13 @@ export const FormAddTeamMember = () => {
         <Form.InputLabel value="First Name" required={true} />
         <Form.InputText
           fieldName="firstName"
-          validation={{ required: "First name is required" }}
+          validation={{
+            required: "First name is required",
+            maxLength: {
+              value: 50,
+              message: "First name may be no more than 50 characters",
+            },
+          }}
           disabled={addUserIsPending || addDrinkOrderIsPending}
         />
       </Form.FormField>
@@ -77,7 +83,13 @@ export const FormAddTeamMember = () => {
         <Form.InputLabel value="Last Name" required={true} />
         <Form.InputText
           fieldName="lastName"
-          validation={{ required: "Last name is required" }}
+          validation={{
+            required: "Last name is required",
+            maxLength: {
+              value: 50,
+              message: "Last name may be no more than 50 characters",
+            },
+          }}
           disabled={addUserIsPending || addDrinkOrderIsPending}
         />
       </Form.FormField>
@@ -89,7 +101,7 @@ export const FormAddTeamMember = () => {
           type={ButtonType.Reset}
           value="Reset"
           disabled={addUserIsPending || addDrinkOrderIsPending}
-          variation={ButtonVariation.SECONDARY}
+          variant={ButtonVariant.SECONDARY}
         />
         <Form.InputButton
           type={ButtonType.Submit}

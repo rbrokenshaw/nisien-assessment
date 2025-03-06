@@ -1,6 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { classNames } from "../../../helpers/classnames";
-import { ButtonVariation } from "../../button";
+import { Button, ButtonVariant } from "../../button";
 
 export enum ButtonType {
   Submit = "submit",
@@ -11,33 +10,28 @@ type Props = {
   type: ButtonType;
   value: string;
   disabled?: boolean;
-  variation?: ButtonVariation;
+  variant?: ButtonVariant;
 };
 
 export const InputButton = ({
   type,
   value,
   disabled,
-  variation = ButtonVariation.PRIMARY,
+  variant = ButtonVariant.PRIMARY,
 }: Props) => {
   const { reset } = useFormContext();
 
-  const handleResetClick = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handleResetClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     reset();
   };
   return (
-    <input
-      className={classNames(
-        "border cursor-pointer px-3 py-2 rounded-lg font-semibold text-sm",
-        variation === ButtonVariation.PRIMARY
-          ? "bg-primary border-lime-300 hover:bg-lime-200 text-lime-900"
-          : "bg-white border-gray-300 hover:bg-gray-100 text-gray-600",
-      )}
-      type={type === ButtonType.Reset ? "button" : type}
-      value={value}
+    <Button
+      variant={variant}
       disabled={disabled}
       onClick={(event) => type === ButtonType.Reset && handleResetClick(event)}
-    />
+    >
+      {value}
+    </Button>
   );
 };

@@ -14,6 +14,7 @@ export const InputText = ({
   validation,
 }: Props) => {
   const { register } = useFormContext();
+
   return (
     <input
       type="text"

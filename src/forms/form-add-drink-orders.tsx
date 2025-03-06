@@ -45,7 +45,13 @@ export const FormAddDrinkOrders = () => {
               <Form.InputText
                 key={`name-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.name`}
-                validation={{ required: "Drink name is required" }}
+                validation={{
+                  required: "Drink name is required",
+                  maxLength: {
+                    value: 50,
+                    message: "Drink name may be no more than 50 characters",
+                  },
+                }}
                 placeholder="e.g. Tea, Coffee, Water"
               />
             </Form.FormField>
@@ -55,7 +61,13 @@ export const FormAddDrinkOrders = () => {
               <Form.InputText
                 key={`type-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.type`}
-                validation={{ required: "Drink type is required" }}
+                validation={{
+                  required: "Drink type is required",
+                  maxLength: {
+                    value: 50,
+                    message: "Drink type may be no more than 50 characters",
+                  },
+                }}
                 placeholder="e.g. Earl Grey, Cappuccino"
               />
             </Form.FormField>
@@ -66,6 +78,12 @@ export const FormAddDrinkOrders = () => {
                 key={`description-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.description`}
                 placeholder="e.g. Milk, two sugars, vanilla syrup"
+                validation={{
+                  maxLength: {
+                    value: 100,
+                    message: "Description may be no more than 100 characters",
+                  },
+                }}
               />
             </Form.FormField>
           </div>

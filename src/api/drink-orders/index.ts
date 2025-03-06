@@ -6,6 +6,13 @@ export type DrinkOrderData = DrinkOrder & {
   userId: string;
 };
 
+export type DrinkOrderResponse = DrinkOrderData & {
+  id: string;
+  additionalSpecification: {
+    description: string;
+  };
+};
+
 // ADD DRINK ORDER
 const addDrinkOrder = async (orderData: DrinkOrderData) => {
   const payload = {
