@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router";
+import { IconHouse } from "../assets/icons/icon-house";
 import { IconUserPlus } from "../assets/icons/icon-user-plus";
 import { Button } from "./button";
 
@@ -18,7 +19,10 @@ export const Menu = () => {
 
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center px-8 py-4 border-b mb-4 bg-black">
-      <h1 className="text-3xl font-semibold text-white">
+      <h1
+        className="text-3xl font-semibold text-white cursor-pointer"
+        onClick={() => navigate("/")}
+      >
         Nisien Tea Round Picker
       </h1>
       <Button onClick={handleButtonClick}>
@@ -27,7 +31,16 @@ export const Menu = () => {
             <IconUserPlus />
           </div>
         )}
-        {isHome ? "Add a Team Member" : "☕ Start a Tea Run"}
+        {isHome ? (
+          "Add a Team Member"
+        ) : (
+          <>
+            <div className="w-4">
+              <IconHouse />
+            </div>
+            Home
+          </>
+        )}
       </Button>
     </div>
   );

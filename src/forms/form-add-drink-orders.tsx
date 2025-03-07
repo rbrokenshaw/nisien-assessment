@@ -47,7 +47,7 @@ export const FormAddDrinkOrders = ({
         >
           <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
             <Form.FormField fieldName={`drinkOrders.${index}.name`}>
-              <Form.InputLabel value="Drink Name" required={true} />
+              <Form.InputLabel value="Drink name" required={true} />
               <Form.InputText
                 key={`name-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.name`}
@@ -63,7 +63,7 @@ export const FormAddDrinkOrders = ({
             </Form.FormField>
 
             <Form.FormField fieldName={`drinkOrders.${index}.type`}>
-              <Form.InputLabel value="Drink Type" required={true} />
+              <Form.InputLabel value="Drink type" required={true} />
               <Form.InputText
                 key={`type-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.type`}
@@ -79,7 +79,7 @@ export const FormAddDrinkOrders = ({
             </Form.FormField>
 
             <Form.FormField fieldName={`drinkOrders.${index}.description`}>
-              <Form.InputLabel value="Drink Description" />
+              <Form.InputLabel value="Drink description" />
               <Form.InputText
                 key={`description-${field.id}-${index}`}
                 fieldName={`drinkOrders.${index}.description`}

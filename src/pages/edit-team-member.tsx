@@ -72,7 +72,13 @@ export const EditTeamMember = () => {
       </Table>
 
       <Form defaultValues={defaultValues} onSubmit={handleSubmit}>
-        <Banners isError={isError} isSuccess={isSuccess} />
+        <Form.BannerGroup
+          isError={isError}
+          isSuccess={isSuccess}
+          errorMessage="Oops! There was an error while adding these drink orders. Please try
+          again later."
+          successMessage="Drink orders added successfully!"
+        />
         <h3 className="font-semibold mt-4">Add drink orders</h3>
         <FormAddDrinkOrders showTitle={false} />
 
@@ -91,32 +97,5 @@ export const EditTeamMember = () => {
         </div>
       </Form>
     </div>
-  );
-};
-
-const Banners = ({
-  isError,
-  isSuccess,
-}: {
-  isError: boolean;
-  isSuccess: boolean;
-}) => {
-  const { formState } = useFormContext();
-
-  return (
-    <>
-      {!formState.isDirty && isError && (
-        <Banner type={BannerType.ERROR}>
-          Oops! There was an error while adding these drink orders. Please try
-          again later.
-        </Banner>
-      )}
-
-      {!formState.isDirty && isSuccess && (
-        <Banner type={BannerType.SUCCESS}>
-          <div>Drink orders added successfully!</div>
-        </Banner>
-      )}
-    </>
   );
 };

@@ -1,10 +1,11 @@
 import { PropsWithChildren } from "react";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { FormBannerGroup } from "./form-banner-group";
 import { FormField } from "./form-field";
+import { FormSectionTitle } from "./form-section-title";
 import { InputButton } from "./inputs/input-button";
 import { InputLabel } from "./inputs/input-label";
 import { InputText } from "./inputs/input-text";
-import { FormSectionTitle } from "./form-section-title";
 
 type Props = {
   defaultValues: FieldValues;
@@ -38,6 +39,7 @@ export const Form = ({
 // Components
 Form.FormField = FormField;
 Form.SectionTitle = FormSectionTitle;
+Form.BannerGroup = FormBannerGroup;
 
 // Inputs
 Form.InputLabel = InputLabel;

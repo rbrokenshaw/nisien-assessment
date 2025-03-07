@@ -21,7 +21,7 @@ export const Button = ({
   return (
     <button
       className={classNames(
-        "flex gap-2 items-center justify-center border rounded-lg font-semibold text-sm px-3 py-2 text-nowrap w-full sm:w-fit",
+        "flex gap-2 items-center justify-center border rounded-lg font-semibold text-sm px-3 py-2 text-nowrap w-full sm:w-fit truncate",
         variant === ButtonVariant.PRIMARY
           ? "bg-primary border-lime-300 hover:bg-lime-200 text-lime-950"
           : "bg-white border-gray-300 hover:bg-gray-100 text-gray-600",

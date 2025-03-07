@@ -32,13 +32,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<UserToSelect[]>([]);
 
   useEffect(() => {
-    console.log("data changed");
     if (data) {
       setUsers(
         data.map((user: UserResponse) => {
           const drinkOrders = user.drinkOrders.map((drink) => {
             return {
-              label: drink.name,
+              label: `${drink.name} - ${drink.type}`,
               value: drink.id,
               ...drink,
             };

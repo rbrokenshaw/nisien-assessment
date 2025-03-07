@@ -62,7 +62,7 @@ export const Home = () => {
           <Link to="/add-team-member" className="font-bold mx-1 w-fit">
             Click here
           </Link>
-          to grow the team!
+          to start!
         </div>
       </div>
     );
@@ -91,7 +91,7 @@ export const Home = () => {
             onClick={() => navigate("/create-drinks-run")}
             disabled={users?.filter((user) => user.selected).length < 2}
           >
-            Start a Tea Run!
+            ☕ Start a Tea Run!
           </Button>
         </div>
       </div>
