@@ -8,7 +8,7 @@ export type DropdownOption = {
 type Props = {
   options: DropdownOption[];
   value?: DropdownOption;
-  onChange: (value: any) => void;
+  onChange: (value: any) => void; // TODO add correct type
 };
 
 export const Dropdown = ({ options, value, onChange }: Props) => {

@@ -4,6 +4,7 @@ import { IconUsersSlash } from "../assets/icons/icon-users-slash";
 import { Button, ButtonVariant } from "../components/button";
 import { UserListItem } from "../components/user-list-item";
 import { UserToSelect, useUserContext } from "../context/user-context";
+import { DropdownOption } from "../components/dropdown";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export const Home = () => {
     setUsers(updatedUsers);
   };
 
-  const handleDropdownChange = (userId: string, value: any) => {
+  const handleDropdownChange = (userId: string, value: DropdownOption) => {
     const matchingDrink = users
       .find((user) => user.id === userId)
       ?.drinkOrders.find((drink) => drink.id === value.value);

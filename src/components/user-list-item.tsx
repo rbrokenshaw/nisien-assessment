@@ -2,12 +2,12 @@ import { useNavigate } from "react-router";
 import { UserToSelect } from "../context/user-context";
 import { classNames } from "../helpers/classnames";
 import { Button } from "./button";
-import { Dropdown } from "./dropdown";
+import { Dropdown, DropdownOption } from "./dropdown";
 
 type Props = {
   user: UserToSelect;
   handleCheckboxClick: (userId: string) => void;
-  handleDropdownChange: (userId: string, value: any) => void;
+  handleDropdownChange: (userId: string, value: DropdownOption) => void;
 };
 
 export const UserListItem = ({
